@@ -1,0 +1,106 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "process-pc-claim",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        -80
+      ],
+      "id": "2bc5f69d-5964-4e25-9cce-f731a9d656b4",
+      "name": "Webhook",
+      "webhookId": "c26042ed-9a1e-4a92-82a0-0d7ef40f0cdd"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=System Prompt: You are an expert P&C Insurance Claims Adjuster. Your job is to process incoming claims data received via the Webhook. You must use your Policy Vector Search tool to verify if the incident is covered, calculate deductions based on the policy, and output a final decision JSON with: status (Approved, Denied, or Flagged for Review), payoutAmount, and a 3-sentence reasoning summary.\n\nHere is the claim data to process:\n {{ $json.body.claimantName }}\n{{ $json.body.incidentDate }}\n{{ $json.body.policyNumber }}\n{{ $json.body.claimType }}\n{{ $json.body.details }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        -80
+      ],
+      "id": "cdd6a76c-9aed-4538-b384-a8904fe39821",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        80
+      ],
+      "id": "928982f5-9791-4782-8b15-8dae080e13c6",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "lsvnRkGdEzZWOgGb",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "915353cb-9d29-47fb-bb75-89dd4b597d78",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "02c5bd9e38d8d1c6e0d4403292447ebed462e881775f0a48a26bf9e1528bb133"
+  },
+  "nodeGroups": [],
+  "id": "Tvj6P7BHfw71axzx",
+  "tags": []
+}
