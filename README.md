@@ -1,8 +1,5 @@
 
 
-
-<img width="243" height="150" alt="claimsiq_agent_layer" src="https://github.com/user-attachments/assets/3a9d99bd-64f5-4c3b-a5c3-360b15355558" />
-
 <img width="808" height="419" alt="Screenshot 2026-06-06 034034" src="https://github.com/user-attachments/assets/da002bcc-0a97-4937-8575-1eaa163fd8b1" />
 
 <img width="1387" height="768" alt="Canva" src="https://github.com/user-attachments/assets/dd9a3f9c-859c-46d3-aea0-33b00b42fa7b" />
